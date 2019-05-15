@@ -22,6 +22,7 @@ strategy_add $PHASE_PARTITION_LWW beaglebone_partition_image
 
 beaglebone_uboot_install ( ) {
     echo "Installing U-Boot from: ${BEAGLEBONE_UBOOT_PATH}"
+    mkdir -p EFI/BOOT
     cp ${BEAGLEBONE_UBOOT_PATH}/MLO .
     cp ${BEAGLEBONE_UBOOT_PATH}/u-boot.img .
     touch uEnv.txt
@@ -29,6 +30,10 @@ beaglebone_uboot_install ( ) {
     freebsd_install_fdt am335x-boneblack.dts am335x-boneblack.dtb
 }
 strategy_add $PHASE_BOOT_INSTALL beaglebone_uboot_install
+
+# Build & install freebsd loader.
+strategy_add $PHASE_BUILD_OTHER freebsd_loader_efi_build
+strategy_add $PHASE_BOOT_INSTALL freebsd_loader_efi_copy EFI/BOOT/bootarm.efi
 
 # Build and install a suitable ubldr
 strategy_add $PHASE_BUILD_OTHER freebsd_ubldr_build UBLDR_LOADADDR=0x88000000

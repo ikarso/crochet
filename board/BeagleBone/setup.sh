@@ -25,10 +25,8 @@ beaglebone_uboot_install ( ) {
     cp ${BEAGLEBONE_UBOOT_PATH}/MLO .
     cp ${BEAGLEBONE_UBOOT_PATH}/u-boot.img .
     touch uEnv.txt
-    freebsd_install_fdt beaglebone.dts bbone.dts
-    freebsd_install_fdt beaglebone.dts bbone.dtb
-    freebsd_install_fdt beaglebone-black.dts bboneblk.dts
-    freebsd_install_fdt beaglebone-black.dts bboneblk.dtb
+    freebsd_install_fdt am335x-bone.dts am335x-bone.dtb
+    freebsd_install_fdt am335x-boneblack.dts am335x-boneblack.dtb
 }
 strategy_add $PHASE_BOOT_INSTALL beaglebone_uboot_install
 

@@ -3,7 +3,8 @@ BEAGLEBONE_UBOOT_PORT="u-boot-beaglebone"
 BEAGLEBONE_UBOOT_BIN="u-boot.img"
 BEAGLEBONE_UBOOT_PATH="/usr/local/share/u-boot/${BEAGLEBONE_UBOOT_PORT}"
 IMAGE_SIZE=$((1000 * 1000 * 1000))
-TARGET_ARCH=armv6
+TARGET_ARCH=armv7
+TARGET_CPUTYPE=cortex-a8
 
 beaglebone_check_uboot ( ) {
     uboot_port_test ${BEAGLEBONE_UBOOT_PORT} ${BEAGLEBONE_UBOOT_BIN}

@@ -368,25 +368,26 @@ freebsd_ubldr_build ( ) {
 # $1: Target directory to receive ubldr files
 #
 freebsd_ubldr_copy ( ) {
-    echo "Installing all ubldr files in $1"
+    TARGET=${PWD}/${1}
+    echo "Installing all ubldr files in ${TARGET}"
     CONF=${TARGET_ARCH}-${KERNCONF}
-    (cd ${WORKDIR}/ubldr-${CONF}/boot && find . | cpio -pdum $1) || exit 1
+    (cd ${WORKDIR}/ubldr-${CONF}/boot && find . | cpio -pdum $TARGET) || exit 1
 }
 
 freebsd_ubldr_copy_ubldr ( ) {
-    if [ $1 = "." ]; then
-	echo "Installing ubldr in ${PWD}"
-    else
-	echo "Installing ubldr in $1"
-    fi
+    TARGET=${PWD}
+    [ "$1" != "." ] && TARGET="$1"
+    echo "Installing ubldr in ${TARGET}"
     CONF=${TARGET_ARCH}-${KERNCONF}
-    cp ${WORKDIR}/ubldr-${CONF}/boot/ubldr* $1 || exit 1
+    cp ${WORKDIR}/ubldr-${CONF}/boot/ubldr* $TARGET || exit 1
 }
 
 freebsd_ubldr_copy_ubldr_help ( ) {
-    echo "Installing ubldr help file in $1"
+    TARGET=${PWD}
+    [ "$1" != "." ] && TARGET="$1"
+    echo "Installing ubldr help file in ${TARGET}"
     CONF=${TARGET_ARCH}-${KERNCONF}
-    cp ${WORKDIR}/ubldr-${CONF}/boot/loader.help $1 || exit 1
+    cp ${WORKDIR}/ubldr-${CONF}/boot/loader.help ${TARGET} || exit 1
 }
 
 #
@@ -437,11 +438,11 @@ freebsd_loader_efi_build ( ) {
 }
 
 freebsd_loader_efi_copy ( ) {
-    target=${PWD}
+    TARGET=${PWD}
     LOGFILE=${WORKDIR}/_.loader.efi.install.${CONF}.log
-    [ "$1" != "." ] && target="$1"
+    [ "$1" != "." ] && TARGET="$1"
     echo "Installing boot1.efi in ${TARGET}"
-    cp ${WORKDIR}/efi-${CONF}/boot/boot1.efi $1 || exit 1
+    cp ${WORKDIR}/efi-${CONF}/boot/boot1.efi $TARGET || exit 1
 }
 
 # freebsd_install_usr_src:  Copy FREEBSD_SRC tree

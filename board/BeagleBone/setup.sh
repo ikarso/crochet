@@ -29,6 +29,7 @@ beaglebone_uboot_install ( ) {
     touch uEnv.txt
     freebsd_install_fdt am335x-bone.dts am335x-bone.dtb
     freebsd_install_fdt am335x-boneblack.dts am335x-boneblack.dtb
+    freebsd_install_fdt am335x-pocketbeagle.dts am335x-pocketbeagle.dtb
 }
 strategy_add $PHASE_BOOT_INSTALL beaglebone_uboot_install
 

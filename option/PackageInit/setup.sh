@@ -31,6 +31,11 @@ package_test ( ) {
 
 package_init ( ) {
     echo "Initializing package system"
+
+	# Mount devfs to get pkg to work with chroot (pkg -c)
+	echo "Mount devfs ${BOARD_FREEBSD_MOUNTPOINT}/dev"
+	mount -t devfs devfs ${BOARD_FREEBSD_MOUNTPOINT}/dev
+
 	if [ -n "${_PACKAGE_SITE}" ]; then
 		cat <<EOF > ${BOARD_FREEBSD_MOUNTPOINT}/etc/pkg/tmp.conf
 tmp: {
@@ -49,6 +54,9 @@ EOF
 
 package_init_cleanup ( ) {
 	rm -f ${BOARD_FREEBSD_MOUNTPOINT}/etc/pkg/tmp.conf
+
+	# Umount devfs
+	umount ${BOARD_FREEBSD_MOUNTPOINT}/dev
 }
 
 # Only register the package init functions once.

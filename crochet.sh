@@ -3,7 +3,7 @@ set -e
 echo 'Starting at '`date`
 
 # General configuration and useful definitions
-TOPDIR=`cd \`dirname $0\`; pwd`
+TOPDIR=`cd \`dirname $0\`; realpath .`
 LIBDIR=${TOPDIR}/lib
 WORKDIR=${TOPDIR}/work
 PREFIX="/usr/local"

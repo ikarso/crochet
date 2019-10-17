@@ -7,8 +7,8 @@
 option PackageInit
 
 package_install ( ) {
-    echo "Installing packages (with dependencies): $@"
-	pkg -c ${BOARD_FREEBSD_MOUNTPOINT} install -y -r ${_PACKAGE_REPO} $@
+	echo "Installing packages (with dependencies): $@"
+	pkg -c ${BOARD_FREEBSD_MOUNTPOINT} install ${PACKAGE_NO_INSTALL_SCRIPTS} -y -r ${_PACKAGE_REPO} $@
 }
 
 strategy_add $PHASE_FREEBSD_OPTION_INSTALL package_install "$@"

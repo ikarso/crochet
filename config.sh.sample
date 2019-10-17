@@ -140,6 +140,14 @@
 #
 #option Package sudo nginx tmux
 
+#
+# Fix/workaround for installing package on non x86 architectures.
+# Extract pkg scripts and execute it with firstboot startup script
+#     pkg: Cannot runscript POST-INSTALL:Exec format error
+#
+#option PackageDumpScript
+
+
 # Uses "portsnap" to download an up-to-date ports tree and
 # install it on the image.
 #

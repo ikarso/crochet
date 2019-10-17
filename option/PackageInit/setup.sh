@@ -47,9 +47,10 @@ EOF
 	else
 		export _PACKAGE_REPO=FreeBSD
 	fi
-    pkg -c ${BOARD_FREEBSD_MOUNTPOINT} update -r ${_PACKAGE_REPO}
-    pkg -c ${BOARD_FREEBSD_MOUNTPOINT} install -y -r ${_PACKAGE_REPO} pkg
-    pkg -c ${BOARD_FREEBSD_MOUNTPOINT} upgrade -r ${_PACKAGE_REPO}
+
+	pkg -c ${BOARD_FREEBSD_MOUNTPOINT} update -r ${_PACKAGE_REPO}
+	pkg -c ${BOARD_FREEBSD_MOUNTPOINT} install ${PACKAGE_NO_INSTALL_SCRIPTS} -y -r ${_PACKAGE_REPO} pkg
+	pkg -c ${BOARD_FREEBSD_MOUNTPOINT} upgrade -r ${_PACKAGE_REPO}
 }
 
 package_init_cleanup ( ) {

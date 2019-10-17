@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+
+# PROVIDE: firstboot
+# REQUIRE: FILESYSTEMS
+# KEYWORD: firstboot
+
+name="firstboot"
+
+. /etc/rc.subr
+
+touch /firstboot-reboot
+
+echo "Execute pkg pre/post/install script"
+

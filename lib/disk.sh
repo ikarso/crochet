@@ -382,7 +382,7 @@ disk_ufs_create ( ) {
 
     echo "Creating a${SIZE_DISPLAY} UFS partition at "`date`
 
-    # 512k alignment helps boot1.efi find UFS.
+    # 512k alignment helps loader_lua.efi find UFS.
     NEW_UFS_SLICE=`gpart add -t freebsd -a 512k ${SIZE_ARG} ${DISK_MD} | sed -e 's/ .*//'` || exit 1
     NEW_UFS_SLICE_NUMBER=`echo ${NEW_UFS_SLICE} | sed -e 's/.*[^0-9]//'`
 
@@ -438,7 +438,7 @@ disk_efi_create ( ) {
     NEW_EFI_PARTITION=`gpart add -t efi -s 800K ${DISK_MD} | sed -e 's/ .*//'` || exit 1
     NEW_EFI_DEVICE=/dev/${NEW_EFI_PARTITION}
 	echo "Writing EFI partition to ${NEW_EFI_DEVICE}"
-    dd if=${FREEBSD_OBJDIR}/stand/efi/boot1/boot1.efifat of=${NEW_EFI_DEVICE}
+    dd if=${FREEBSD_OBJDIR}/stand/efi/loader_lua/loader_lua.efifat of=${NEW_EFI_DEVICE}
 }
 
 
